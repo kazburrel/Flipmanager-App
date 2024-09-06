@@ -3,9 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Permission;
+use App\Enums\RoleEnum;
+
 
 class UserSeeder extends Seeder
 {
@@ -14,7 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        $adminUser = User::create([
             'id' => Str::uuid(),
             'fname' => 'Admin',
             'lname' => 'User',
@@ -26,5 +30,17 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // Assign Admin role to the created user
+        $adminRole = Role::where('name', RoleEnum::Admin->value)->first();
+        if ($adminRole) {
+            $adminUser->assignRole($adminRole);
+
+            // Assign all permissions to the Admin user
+            $permissions = Permission::all();
+            foreach ($permissions as $permission) {
+                $adminUser->givePermissionTo($permission);
+            }
+        }
     }
 }
