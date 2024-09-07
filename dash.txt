@@ -1,0 +1,76 @@
+Here’s an updated **Main Dashboard Area** tailored to the roles (Admin, Editor, User) based on the permissions from `PermissionEnum`:
+
+---
+
+### **Main Dashboard Area**
+
+#### **Overview Stats (for Admin)**
+   - **Total Users**: Display the count of all registered users.
+   - **Total Files Uploaded**: Count of all files (images/PDFs) uploaded.
+   - **Total Categories**: Number of categories and subcategories created.
+   - **Role Summary**: Show breakdown of users by role (Admin, Editor, User).
+
+#### **Quick Actions Section (for Admin)**
+   - **Add New Category**: Quick access button to create categories or subcategories.
+   - **Upload File**: Direct link to the file upload form.
+   - **Manage Users**: Shortcut to the user management page.
+
+#### **Recent Activity (for Admin)**
+   - Show recent actions like:
+     - New user registrations.
+     - Files uploaded, edited, or deleted.
+     - Categories added or modified.
+     - Permissions assigned or modified.
+   
+---
+
+### **For Editor**
+   - **Quick Actions Section**:
+     - **Upload File**: Access to upload images or PDFs.
+     - **Manage Files**: Ability to edit or delete previously uploaded files.
+   
+   - **Recent Activity (for Editor)**:
+     - Files they uploaded, edited, or deleted.
+     - Any file activity visible to Editors.
+
+---
+
+### **For User**
+   - **Quick Actions Section**:
+     - **Upload File**: Access to upload files.
+   
+   - **Recent Activity (for User)**:
+     - Files they uploaded.
+     - Files available for viewing based on their permissions.
+
+---
+
+### **Permissions Mapping (Admin, Editor, User)**
+
+#### **Admin**:
+   - **Permissions**: 
+     - `ManageCategories`
+     - `ManageUsers`
+     - `ManagePermissions`
+     - `ManageFiles`
+     - `ViewFiles`
+     - `UploadFiles`
+     - `EditFiles`
+     - `DeleteFiles`
+
+#### **Editor**:
+   - **Permissions**:
+     - `ManageFiles`
+     - `ViewFiles`
+     - `UploadFiles`
+     - `EditFiles`
+     - `DeleteFiles`
+
+#### **User**:
+   - **Permissions**:
+     - `ViewFiles`
+     - `UploadFiles`
+
+---
+
+This ensures the **Admin** has complete visibility and control, while **Editors** and **Users** have access to only the features that match their roles and permissions.

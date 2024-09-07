@@ -1,0 +1,41 @@
+Here’s a layout for the **Category Management Dashboard**, with the ability to create subcategories:
+
+---
+
+### **Category Management Dashboard**
+
+#### **1. Overview Section**
+   - **Total Categories**: Display the count of all main categories.
+   - **Total Subcategories**: Count of all subcategories.
+   - **Categories/Subcategories List**: 
+     - A table or tree view listing all categories and their respective subcategories.
+     - Display details such as category name, description (if applicable), and number of files associated.
+
+#### **2. Actions Section**
+   - **Add New Category Button**: 
+     - Opens a form to create a main category with fields like:
+       - **Category Name** (required)
+       - **Description** (optional)
+   
+   - **Add New Subcategory Button**: 
+     - Appears next to each category in the list, allowing the creation of subcategories under a specific category.
+     - Form includes:
+       - **Subcategory Name** (required)
+       - **Parent Category** (automatically set based on selection)
+       - **Description** (optional)
+
+#### **3. Category Management Features**
+   - **Edit Category**: Option to edit the name, description, or reassign a subcategory to a different parent category.
+   - **Delete Category**: Option to delete a category or subcategory (with a confirmation prompt).
+     - When deleting, ensure it prompts about the files associated (if any).
+   
+#### **4. Search and Filter**
+   - **Search Bar**: Allows searching categories or subcategories by name.
+   - **Filter**: Filter by categories with/without subcategories, or by number of files associated.
+
+#### **5. Files Linked to Categories**
+   - Each category and subcategory entry should show the number of files associated, with an option to view those files.
+
+---
+
+This structure allows admins to manage both categories and subcategories intuitively, with a focus on usability and clarity.
