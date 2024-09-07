@@ -60,7 +60,10 @@
                     <a class="menu-link{{ request()->routeIs('admin.categories') ? ' active' : '' }}"
                         href="{{ route('admin.categories') }}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <span></span>
+                        </span>
+                        <span class="menu-icon">
+                            <i class="bi bi-folder"></i>
                         </span>
                         <span class="menu-title">Category Management</span>
                     </a>

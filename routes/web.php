@@ -4,6 +4,7 @@ use App\Enums\RoleEnum;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,8 +20,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [CategoryController::class, 'listCategories'])->name('admin.categories');
             Route::post('/', [CategoryController::class, 'storeCategory'])->name('admin.categories.store');
             Route::put('/{category}/edit', [CategoryController::class, 'editCategory'])->name('admin.categories.edit');
-            // Route::patch('/{category}', [CategoryController::class, 'updateCategory'])->name('admin.categories.update');
             Route::delete('/{category}', [CategoryController::class, 'destroyCategory'])->name('admin.categories.destroy');
+        });
+
+        Route::prefix('admin/subcategories')->group(function () {
+            Route::post('/', [SubcategoryController::class, 'storeSubcategory'])->name('admin.subcategories.store');
+            Route::put('/{subcategory}/edit', [SubcategoryController::class, 'updateSubcategory'])->name('admin.subcategories.update');
+            Route::delete('/{subcategory}', [SubcategoryController::class, 'destroySubcategory'])->name('admin.subcategories.destroy');
         });
     });
 

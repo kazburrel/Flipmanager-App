@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function listCategories()
     {
-        $categories = Category::all();
+        $categories = Category::with('subcategories')->get();
         $user = Auth::user();
         return view('backend.category.category', [
             'categories' => $categories,
