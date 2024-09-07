@@ -82,50 +82,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="{{ asset('admin_assets/js/custom/apps/inbox/reply.js') }}"></script>
-    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Livewire.on('swal:toast', function(data) {
-                Swal.fire({
-                    toast: true,
-                    position: data[0].position || 'top-end',
-                    icon: data[0].type,
-                    title: data[0].title,
-                    showConfirmButton: false,
-                    timer: data[0].timer || 3000,
-                    timerProgressBar: true,
-                });
-            });
-        });
-
-        function confirmDelete(event, uuid) {
-            event.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.dispatch('deleteMember', {
-                        uuid: uuid
-                    });
-                }
-            });
-        }
-    </script>
-
-
-
-    @livewireScripts
 </body>
 
 </html>
