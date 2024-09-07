@@ -101,9 +101,13 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('get.brs.team') ? ' active' : '' }}" href="#">
+                    <a class="menu-link{{ request()->routeIs('admin.users') ? ' active' : '' }}"
+                        href="{{ route('admin.users') }}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <span></span>
+                        </span>
+                        <span class="menu-icon fs-3">
+                            <i class="bi bi-people"></i>
                         </span>
                         <span class="menu-title">User Management</span>
                     </a>

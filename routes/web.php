@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,6 +29,14 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{subcategory}/edit', [SubcategoryController::class, 'updateSubcategory'])->name('admin.subcategories.update');
             Route::delete('/{subcategory}', [SubcategoryController::class, 'destroySubcategory'])->name('admin.subcategories.destroy');
         });
+
+        Route::prefix('admin/users')->group(function () {
+            Route::get('/', [UserController::class, 'listUsers'])->name('admin.users');
+            Route::post('/', [UserController::class, 'storeUser'])->name('admin.users.store');
+            Route::put('/{user}/edit', [UserController::class, 'editUser'])->name('admin.users.edit');
+            Route::delete('/{user}', [UserController::class, 'destroyUser'])->name('admin.users.destroy');
+        });
+        Route::get('/permissions/{user}', [UserController::class, 'managePermissions'])->name('admin.users.permissions');
     });
 
     Route::middleware(['role:' . RoleEnum::Editor->value])->group(function () {

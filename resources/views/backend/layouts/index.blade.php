@@ -80,8 +80,9 @@
     <script src="{{ asset('admin_assets/js/custom/utilities/modals/users-search.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/apps/ecommerce/sales/listing.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/account/settings/signin-methods.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{-- <script src="{{ asset('admin_assets/js/custom/apps/ecommerce/catalog/products.js') }}"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
+    <script src="{{ asset('admin_assets/js/custom/apps/user-management/users/list/table.js') }}"></script>
     @include('sweetalert::alert')
 </body>
 

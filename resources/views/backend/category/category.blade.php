@@ -1,6 +1,9 @@
 @extends('backend.layouts.index')
 @section('content')
     @include('backend.category.partials.toolbar')
+
+    <div style="margin-top: 20px;"></div>
+
     @include('backend.category.partials.category_table')
 @endsection
 
