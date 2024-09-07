@@ -29,8 +29,10 @@
             data-bs-target="#kt_modal_edit_category_{{ $category->id }}" title="Edit">
             <i class="bi bi-pencil-fill text-primary"></i>
         </a>
-        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"
-            data-kt-ecommerce-order-filter="delete_row" title="Delete">
+        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" data-bs-toggle="modal"
+            data-bs-target="#deleteModal" title="Delete"
+            onclick="document.querySelector('#deleteModal .modal-body p').textContent = 'Are you sure you want to delete the category {{ $category->name }}?'; 
+                     document.querySelector('#deleteModal form').action = '{{ route('admin.categories.destroy', $category->id) }}';">
             <i class="bi bi-trash-fill text-danger"></i>
         </a>
         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-success btn-sm" data-bs-toggle="modal"
@@ -43,7 +45,7 @@
         </button>
     </td>
 </tr>
-@include('backend.category.partials.modals', ['category' => $category])
+{{-- @include('backend.category.partials.modals', ['category' => $category]) --}}
 
 <!-- Subcategory Rows -->
 @if ($category->subcategories)
@@ -80,10 +82,16 @@
                     title="Edit">
                     <i class="bi bi-pencil-fill text-primary"></i>
                 </a>
-                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" title="Delete">
+                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1" title="Delete"
+                    data-bs-toggle="modal" data-bs-target="#deleteModal"
+                    onclick="document.querySelector('#deleteModal .modal-body p').textContent = 'Are you sure you want to delete the subcategory: {{ $subcategory->name }}?'; document.querySelector('#deleteModal form').action = '{{ route('admin.subcategories.destroy', $subcategory->id) }}';">
                     <i class="bi bi-trash-fill text-danger"></i>
                 </a>
             </td>
         </tr>
+        @include('backend.category.partials.modals', [
+            'category' => $category,
+            'subcategory' => $subcategory,
+        ])
     @endforeach
 @endif

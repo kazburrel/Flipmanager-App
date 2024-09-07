@@ -38,4 +38,13 @@ class CategoryController extends Controller
         toast()->success('Category updated successfully.');
         return redirect()->route('admin.categories');
     }
+
+    public function destroyCategory($category)
+    {
+        // dd($category);
+        $category = Category::findOrFail($category);
+        $category->delete();
+        toast()->success('Category deleted successfully.');
+        return redirect()->route('admin.categories');
+    }
 }
