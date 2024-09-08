@@ -39,7 +39,7 @@
                                 <div class="modal-content rounded">
                                     <div class="modal-header pb-0 border-0 justify-content-end">
                                         <button type="button" class="btn btn-sm btn-icon btn-active-color-primary"
-                                            data-bs-dismiss="modal">
+                                            data-bs-dismiss="modal" id="closeModalButton">
                                             <i class="bi bi-x-lg"></i>
                                         </button>
                                     </div>
@@ -171,22 +171,33 @@
                                     <td class="text-gray-800">{{ $user->lname }}</td>
                                     <td class="text-gray-800">{{ $user->username }}</td>
                                     <td>
-                                        <div class="badge badge-success fw-bolder">
-                                            {{ $user->getRoleNames()->first() }}
+                                        @php
+                                            $role = $user->getRoleNames()->first();
+                                            $badgeClass = 'badge-secondary';
+                                            if ($role === 'admin') {
+                                                $badgeClass = 'badge-primary';
+                                            } elseif ($role === 'editor') {
+                                                $badgeClass = 'badge-warning';
+                                            } elseif ($role === 'user') {
+                                                $badgeClass = 'badge-success';
+                                            }
+                                        @endphp
+                                        <div class="badge {{ $badgeClass }} fw-bolder">
+                                            {{ $role }}
                                         </div>
                                     </td>
                                     <td>{{ $user->created_at->format('d M Y, h:i a') }}</td>
                                     <td class="text-end">
                                         <a href="#"
                                             class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                                            data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user" title="Edit">
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_edit_user_{{ $user->id }}" title="Edit">
                                             <i class="bi bi-pencil-fill text-primary"></i>
                                         </a>
                                         <a href="#"
                                             class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"
-                                            data-bs-toggle="modal" data-bs-target="#deleteModal" title="Delete"
-                                            onclick="document.querySelector('#deleteModal .modal-body p').textContent = 'Are you sure you want to delete this user?'; 
-                                                 document.querySelector('#deleteModal form').action = '{{ route('admin.users.destroy', $user->id) }}';">
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $user->id }}"
+                                            title="Delete">
                                             <i class="bi bi-trash-fill text-danger"></i>
                                         </a>
                                     </td>
@@ -198,6 +209,155 @@
                                         </a>
                                     </td>
                                 </tr>
+                                <div class="modal fade" id="deleteModal_{{ $user->id }}" tabindex="-1"
+                                    aria-labelledby="deleteModalLabel_{{ $user->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel_{{ $user->id }}">Confirm
+                                                    Deletion
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete this user?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <form method="POST"
+                                                    action="{{ route('admin.users.destroy', $user->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="kt_modal_edit_user_{{ $user->id }}" tabindex="-1"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                        <div class="modal-content rounded">
+                                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-icon btn-active-color-primary"
+                                                    data-bs-dismiss="modal" id="closeModalButton">
+                                                    <i class="bi bi-x-lg"></i>
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                                    <form id="editUserForm_{{ $user->id }}"
+                                                        action="{{ route('admin.users.update', $user->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="mb-13 text-center">
+                                                            <h1 class="mb-3">Update User</h1>
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">First Name</span>
+                                                            </label>
+                                                            <input type="text" class="form-control form-control-solid"
+                                                                placeholder="Enter First Name" name="fname"
+                                                                value="{{ old('fname', $user->fname) }}" />
+                                                            @error('fname')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">Last Name</span>
+                                                            </label>
+                                                            <input type="text" class="form-control form-control-solid"
+                                                                placeholder="Enter Last Name" name="lname"
+                                                                value="{{ old('lname', $user->lname) }}" />
+                                                            @error('lname')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">Username</span>
+                                                            </label>
+                                                            <input type="text" class="form-control form-control-solid"
+                                                                placeholder="Enter Username" name="username"
+                                                                value="{{ old('username', $user->username) }}" />
+                                                            @error('username')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">Email</span>
+                                                            </label>
+                                                            <input type="email" class="form-control form-control-solid"
+                                                                placeholder="Enter Email" name="email"
+                                                                value="{{ old('email', $user->email) }}" />
+                                                            @error('email')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">Password</span>
+                                                            </label>
+                                                            <input type="password" class="form-control form-control-solid"
+                                                                placeholder="Enter Password" name="password" />
+                                                            @error('password')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">Confirm Password</span>
+                                                            </label>
+                                                            <input type="password" class="form-control form-control-solid"
+                                                                placeholder="Confirm Password"
+                                                                name="password_confirmation" />
+                                                            @error('password_confirmation')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="d-flex flex-column mb-8 fv-row">
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">Role</span>
+                                                            </label>
+                                                            <select class="form-control form-control-solid"
+                                                                name="role">
+                                                                @foreach (App\Enums\RoleEnum::cases() as $role)
+                                                                    <option value="{{ $role->value }}"
+                                                                        {{ old('role', $user->getRoleNames()->first()) == $role->value ? 'selected' : '' }}>
+                                                                        {{ $role->label() }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('role')
+                                                                <div class="alert alert-danger">{{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <span class="indicator-label">Submit</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @empty
                                 <tr>
                                     <td colspan="7">No users found</td>

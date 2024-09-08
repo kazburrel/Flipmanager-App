@@ -1,6 +1,5 @@
 <?php
 
-// database/seeders/RoleSeeder.php
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -8,7 +7,6 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Enums\RoleEnum;
 use App\Enums\PermissionEnum;
-use Illuminate\Support\Str;
 
 class RoleSeeder extends Seeder
 {
@@ -18,7 +16,6 @@ class RoleSeeder extends Seeder
         foreach (PermissionEnum::cases() as $permission) {
             Permission::firstOrCreate([
                 'name' => $permission->value,
-                // 'uuid' => Str::uuid(),
             ]);
         }
 

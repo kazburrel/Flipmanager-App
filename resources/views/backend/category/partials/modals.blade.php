@@ -55,63 +55,65 @@
 </div>
 
 <!-- Edit Subcategory Modal -->
-<div class="modal fade" id="kt_modal_edit_subcategory_{{ $subcategory->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content rounded">
-            <div class="modal-header pb-0 border-0 justify-content-end">
-                <button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
-            <div>
-                <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                    <form action="{{ route('admin.subcategories.update', ['subcategory' => $subcategory->id]) }}"
-                        method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="category_id" value="{{ $category->id }}">
-                        <div class="mb-13 text-center">
-                            <h1 class="mb-3">Edit Subcategory</h1>
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Subcategory Name</span>
-                            </label>
-                            <input type="text" class="form-control form-control-solid"
-                                placeholder="Enter Subcategory Name" name="name"
-                                value="{{ old('name', $subcategory->name) }}" />
-                            @error('name')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span>Description</span>
-                            </label>
-                            <textarea class="form-control form-control-solid" rows="3" name="description"
-                                placeholder="Enter Subcategory Description">{{ old('description', $subcategory->description) }}</textarea>
-                            @error('description')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span>Category</span>
-                            </label>
-                            <input type="text" class="form-control form-control-solid" value="{{ $category->name }}"
-                                readonly />
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="indicator-label">Submit</span>
-                            </button>
-                        </div>
-                    </form>
+@if (isset($subcategory))
+    <div class="modal fade" id="kt_modal_edit_subcategory_{{ $subcategory->id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content rounded">
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div>
+                    <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                        <form action="{{ route('admin.subcategories.update', ['subcategory' => $subcategory->id]) }}"
+                            method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="category_id" value="{{ $category->id }}">
+                            <div class="mb-13 text-center">
+                                <h1 class="mb-3">Edit Subcategory</h1>
+                            </div>
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Subcategory Name</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid"
+                                    placeholder="Enter Subcategory Name" name="name"
+                                    value="{{ old('name', $subcategory->name) }}" />
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Description</span>
+                                </label>
+                                <textarea class="form-control form-control-solid" rows="3" name="description"
+                                    placeholder="Enter Subcategory Description">{{ old('description', $subcategory->description) }}</textarea>
+                                @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Category</span>
+                                </label>
+                                <input type="text" class="form-control form-control-solid"
+                                    value="{{ $category->name }}" readonly />
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="indicator-label">Submit</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endif
 
 
 <!-- Edit Category Modal -->

@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user();
+        $user = authenticated();
 
         if ($user->hasRole(RoleEnum::Admin->value)) {
             return redirect()->intended(route('admin.dashboard'));

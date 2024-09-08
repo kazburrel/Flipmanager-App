@@ -10,7 +10,7 @@ class DashboardController extends Controller
     // Admin Dashboard
     public function adminDashboard()
     {
-        $user = Auth::user();
+        $user = authenticated();
         return view('backend.dashboards.admin', [
             'title' => 'Admin Dashboard',
             'user' => $user,

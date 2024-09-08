@@ -48,70 +48,73 @@
                     </a>
                 </div>
 
-
-
-                <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Category</span>
+                @can('manage categories')
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-2">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Category</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('admin.categories') ? ' active' : '' }}"
-                        href="{{ route('admin.categories') }}">
-                        <span class="menu-bullet">
-                            <span></span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="bi bi-folder"></i>
-                        </span>
-                        <span class="menu-title">Category Management</span>
-                    </a>
-                </div>
-
-                <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">File System</span>
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs('admin.categories') ? ' active' : '' }}"
+                            href="{{ route('admin.categories') }}">
+                            <span class="menu-bullet">
+                                <span></span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="bi bi-folder"></i>
+                            </span>
+                            <span class="menu-title">Category Management</span>
+                        </a>
                     </div>
-                </div>
+                @endcan
 
-                <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('job.vacancy') || request()->routeIs('get.job.application.uuid') ? ' active' : '' }}"
-                        href="#">
-                        <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
-                        </span>
-                        <span class="menu-title">File Uploads</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('get.advertise.job.vacancy') ? ' active' : '' }}"
-                        href="#">
-                        <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
-                        </span>
-                        <span class="menu-title">All Files</span>
-                    </a>
-                </div>
-
-
-                <div class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Users</span>
+                @can('manage files')
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-2">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">File System</span>
+                        </div>
                     </div>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('admin.users') ? ' active' : '' }}"
-                        href="{{ route('admin.users') }}">
-                        <span class="menu-bullet">
-                            <span></span>
-                        </span>
-                        <span class="menu-icon fs-3">
-                            <i class="bi bi-people"></i>
-                        </span>
-                        <span class="menu-title">User Management</span>
-                    </a>
-                </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs('job.vacancy') || request()->routeIs('get.job.application.uuid') ? ' active' : '' }}"
+                            href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">File Uploads</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs('get.advertise.job.vacancy') ? ' active' : '' }}"
+                            href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Files</span>
+                        </a>
+                    </div>
+                @endcan
+
+                @can('manage users')
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-2">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Users</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs('admin.users') || request()->routeIs('admin.users.permissions') ? ' active' : '' }}"
+                            href="{{ route('admin.users') }}">
+                            <span class="menu-bullet">
+                                <span></span>
+                            </span>
+                            <span class="menu-icon fs-3">
+                                <i class="bi bi-people"></i>
+                            </span>
+                            <span class="menu-title">User Management</span>
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
     </div>

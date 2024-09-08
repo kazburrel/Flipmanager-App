@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function listCategories()
     {
         $categories = Category::with('subcategories')->get();
-        $user = Auth::user();
+        $user = authenticated();
         return view('backend.category.category', [
             'categories' => $categories,
             'user' => $user
@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
     public function storeCategory(StoreCategoryRequest $request)
     {
-        $user = Auth::user();
+        $user = authenticated();
         Category::create($request->safe()->merge([
             'created_by' => $user->id,
         ])->all());

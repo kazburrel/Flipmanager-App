@@ -45,6 +45,7 @@
         </button>
     </td>
 </tr>
+@include('backend.category.partials.modals', ['category' => $category])
 
 <!-- Subcategory Rows -->
 @if ($category->subcategories)
@@ -89,7 +90,6 @@
             </td>
         </tr>
         @include('backend.category.partials.modals', [
-            'category' => $category,
             'subcategory' => $subcategory,
         ])
     @endforeach

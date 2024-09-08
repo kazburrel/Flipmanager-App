@@ -3,6 +3,7 @@
 use App\Enums\RoleEnum;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
@@ -16,27 +17,33 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['role:' . RoleEnum::Admin->value])->group(function () {
         Route::get('/admin/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+    });
 
-        Route::prefix('admin/categories')->group(function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::prefix('admin/categories')->middleware('permission:manage categories')->group(function () {
             Route::get('/', [CategoryController::class, 'listCategories'])->name('admin.categories');
             Route::post('/', [CategoryController::class, 'storeCategory'])->name('admin.categories.store');
             Route::put('/{category}/edit', [CategoryController::class, 'editCategory'])->name('admin.categories.edit');
             Route::delete('/{category}', [CategoryController::class, 'destroyCategory'])->name('admin.categories.destroy');
         });
 
-        Route::prefix('admin/subcategories')->group(function () {
+        Route::prefix('admin/subcategories')->middleware('permission:manage categories')->group(function () {
             Route::post('/', [SubcategoryController::class, 'storeSubcategory'])->name('admin.subcategories.store');
             Route::put('/{subcategory}/edit', [SubcategoryController::class, 'updateSubcategory'])->name('admin.subcategories.update');
             Route::delete('/{subcategory}', [SubcategoryController::class, 'destroySubcategory'])->name('admin.subcategories.destroy');
         });
 
-        Route::prefix('admin/users')->group(function () {
+        Route::prefix('admin/users')->middleware('permission:manage users')->group(function () {
             Route::get('/', [UserController::class, 'listUsers'])->name('admin.users');
             Route::post('/', [UserController::class, 'storeUser'])->name('admin.users.store');
-            Route::put('/{user}/edit', [UserController::class, 'editUser'])->name('admin.users.edit');
+            Route::put('/{user}/update', [UserController::class, 'updateUser'])->name('admin.users.update');
             Route::delete('/{user}', [UserController::class, 'destroyUser'])->name('admin.users.destroy');
         });
-        Route::get('/permissions/{user}', [UserController::class, 'managePermissions'])->name('admin.users.permissions');
+
+        Route::prefix('/permissions')->middleware('permission:manage permissions')->group(function () {
+            Route::get('/{user}', [PermissionController::class, 'managePermissions'])->name('admin.users.permissions');
+            Route::put('/{user}', [PermissionController::class, 'updatePermission'])->name('admin.users.updatePermission');
+        });
     });
 
     Route::middleware(['role:' . RoleEnum::Editor->value])->group(function () {

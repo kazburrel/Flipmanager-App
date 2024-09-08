@@ -6,8 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Role;
 use App\Models\Permission;
+use App\Enums\PermissionEnum;
 use App\Enums\RoleEnum;
 
 class UserSeeder extends Seeder
@@ -17,6 +17,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Fetch all permissions
+        $permissions = Permission::all();
+
+        // Check if permissions are fetched correctly
+        if ($permissions->isEmpty()) {
+            throw new \Exception('No permissions found. Ensure the PermissionSeeder is run before UserSeeder.');
+        }
+
         // Create Admin user
         $adminUser = User::create([
             'id' => Str::uuid(),
@@ -30,18 +38,20 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $adminUser->assignRole(RoleEnum::Admin->value); // Assign role
 
-        // Assign Admin role to the created user
-        $adminRole = Role::where('name', RoleEnum::Admin->value)->first();
-        if ($adminRole) {
-            $adminUser->assignRole($adminRole);
-
-            // Assign all permissions to the Admin user
-            $permissions = Permission::all();
-            foreach ($permissions as $permission) {
-                $adminUser->givePermissionTo($permission);
-            }
-        }
+        // Assign Admin permissions to the created user
+        $adminPermissions = Permission::whereIn('name', [
+            PermissionEnum::ManageUsers->value,
+            PermissionEnum::ManagePermissions->value,
+            PermissionEnum::ManageCategories->value,
+            PermissionEnum::ManageFiles->value,
+            PermissionEnum::ViewFiles->value,
+            PermissionEnum::UploadFiles->value,
+            PermissionEnum::EditFiles->value,
+            PermissionEnum::DeleteFiles->value,
+        ])->get();
+        $adminUser->permissions()->sync($adminPermissions->pluck('uuid'));
 
         // Create Editor user
         $editorUser = User::create([
@@ -56,12 +66,16 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $editorUser->assignRole(RoleEnum::Editor->value); // Assign role
 
-        // Assign Editor role to the created user
-        $editorRole = Role::where('name', RoleEnum::Editor->value)->first();
-        if ($editorRole) {
-            $editorUser->assignRole($editorRole);
-        }
+        // Assign Editor permissions to the created user
+        $editorPermissions = Permission::whereIn('name', [
+            PermissionEnum::ViewFiles->value,
+            PermissionEnum::UploadFiles->value,
+            PermissionEnum::EditFiles->value,
+            PermissionEnum::DeleteFiles->value,
+        ])->get();
+        $editorUser->permissions()->sync($editorPermissions->pluck('uuid'));
 
         // Create Regular user
         $regularUser = User::create([
@@ -76,11 +90,12 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $regularUser->assignRole(RoleEnum::User->value); // Assign role
 
-        // Assign User role to the created user
-        $userRole = Role::where('name', RoleEnum::User->value)->first();
-        if ($userRole) {
-            $regularUser->assignRole($userRole);
-        }
+        // Assign User permissions to the created user
+        $userPermissions = Permission::whereIn('name', [
+            PermissionEnum::ViewFiles->value,
+        ])->get();
+        $regularUser->permissions()->sync($userPermissions->pluck('uuid'));
     }
 }

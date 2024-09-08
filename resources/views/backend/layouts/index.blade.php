@@ -48,7 +48,6 @@
             </div>
         </div>
     </div>
-
     <script>
         var hostUrl = "assets/";
     </script>
