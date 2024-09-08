@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -11,19 +12,42 @@ class DashboardController extends Controller
     public function adminDashboard()
     {
         $user = authenticated();
+        $totalCategories = Category::count();
+        $totalSubCategories = Subcategory::count();
+        $totalUsers = User::count();
+        $adminCount = User::role('admin')->count();
+        $editorCount = User::role('editor')->count();
+        $userCount = User::role('user')->count();
+
         return view('backend.dashboards.admin', [
             'title' => 'Admin Dashboard',
             'user' => $user,
-            // Add any other data you may want to pass to the view
+            'totalCategories' => $totalCategories,
+            'totalSubCategories' => $totalSubCategories,
+            'totalUsers' => $totalUsers,
+            'adminCount' => $adminCount,
+            'editorCount' => $editorCount,
+            'userCount' => $userCount,
         ]);
     }
 
     // Editor Dashboard
     public function editorDashboard()
     {
+        $user = authenticated();
+        $totalCategories = Category::count();
+        $totalSubCategories = Subcategory::count();
+        $totalUsers = User::count();
+        $adminCount = User::role('admin')->count();
+        $editorCount = User::role('editor')->count();
+        $userCount = User::role('user')->count();
+
         return view('dashboards.editor', [
             'title' => 'Editor Dashboard',
-            // Add any other data you may want to pass to the view
+            'user' => $user,
+            'adminCount' => $adminCount,
+            'editorCount' => $editorCount,
+            'userCount' => $userCount,
         ]);
     }
 
@@ -32,7 +56,6 @@ class DashboardController extends Controller
     {
         return view('dashboards.user', [
             'title' => 'User Dashboard',
-            // Add any other data you may want to pass to the view
         ]);
     }
 }

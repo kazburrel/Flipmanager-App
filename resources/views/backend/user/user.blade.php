@@ -173,13 +173,13 @@
                                     <td>
                                         @php
                                             $role = $user->getRoleNames()->first();
-                                            $badgeClass = 'badge-secondary';
+                                            $badgeClass = 'badge-light-secondary';
                                             if ($role === 'admin') {
-                                                $badgeClass = 'badge-primary';
+                                                $badgeClass = 'badge-light-primary';
                                             } elseif ($role === 'editor') {
-                                                $badgeClass = 'badge-warning';
+                                                $badgeClass = 'badge-light-warning';
                                             } elseif ($role === 'user') {
-                                                $badgeClass = 'badge-success';
+                                                $badgeClass = 'badge-light-success';
                                             }
                                         @endphp
                                         <div class="badge {{ $badgeClass }} fw-bolder">

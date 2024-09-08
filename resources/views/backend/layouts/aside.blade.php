@@ -39,10 +39,13 @@
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
                 id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
                 <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('admin.dashboard') ? ' active' : '' }}"
+                    <a class="menu-link{{ request()->routeIs('admin.dashboard') || request()->routeIs('editor.dashboard') || request()->routeIs('user.dashboard') ? ' active' : '' }}"
                         href="{{ route('admin.dashboard') }}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <span></span>
+                        </span>
+                        <span class="menu-icon">
+                            <i class="bi bi-speedometer2"></i>
                         </span>
                         <span class="menu-title">Dashboard</span>
                     </a>
