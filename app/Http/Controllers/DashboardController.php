@@ -35,27 +35,22 @@ class DashboardController extends Controller
     public function editorDashboard()
     {
         $user = authenticated();
-        $totalCategories = Category::count();
-        $totalSubCategories = Subcategory::count();
-        $totalUsers = User::count();
-        $adminCount = User::role('admin')->count();
-        $editorCount = User::role('editor')->count();
-        $userCount = User::role('user')->count();
+        // $totalFilesUploaded = $user->files()->count();
 
-        return view('dashboards.editor', [
+        return view('backend.dashboards.editor', [
             'title' => 'Editor Dashboard',
             'user' => $user,
-            'adminCount' => $adminCount,
-            'editorCount' => $editorCount,
-            'userCount' => $userCount,
+            // 'totalFilesUploaded' => $totalFilesUploaded,
         ]);
     }
 
     // User Dashboard
     public function userDashboard()
     {
-        return view('dashboards.user', [
+        $user = authenticated();
+        return view('backend.dashboards.user', [
             'title' => 'User Dashboard',
+            'user' => $user,
         ]);
     }
 }

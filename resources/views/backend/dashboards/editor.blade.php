@@ -4,82 +4,12 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <div id="kt_content_container" class="container-xxl">
             <div class="row g-5 g-xl-10 mb-10 justify-content-center">
-                <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-                    <div class="card card-flush h-md-50 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="card card-flush h-100 border rounded-3 shadow-sm" style="background-color: #f8f9fa;">
                         <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-primary me-2 lh-1 ls-n2">{{ $totalCategories }}</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Categories</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card card-flush h-md-50 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-success me-2 lh-1 ls-n2">{{ $totalSubCategories }}</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Subcategories</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-info me-2 lh-1 ls-n2">{{ $totalUsers }}</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Users</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-warning me-2 lh-1 ls-n2">{{ $adminCount }}</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Users with Role: Admin</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-danger me-2 lh-1 ls-n2">{{ $editorCount }}</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Users with Role: Editor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-secondary me-2 lh-1 ls-n2">{{ $userCount }}</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Users with Role: User</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
+                            <div class="card-title d-flex flex-column align-items-center">
                                 <span class="fs-2hx fw-bolder text-primary me-2 lh-1 ls-n2">5</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Files</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 border rounded-3 shadow-sm"
-                        style="background-color: #f8f9fa;">
-                        <div class="card-header pt-5">
-                            <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-success me-2 lh-1 ls-n2">3</span>
-                                <span class="text-gray-600 pt-1 fw-bold fs-6">Total Folders</span>
+                                <span class="text-gray-600 pt-1 fw-bold fs-6 text-center">Total Uploads</span>
                             </div>
                         </div>
                     </div>
@@ -107,7 +37,7 @@
                             </div>
                             <div class="card-toolbar">
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                    <h3 class="card-label">Latest File Uploads</h3>
+                                    <h3 class="card-label">Your Latest File Uploads</h3>
 
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center d-none"

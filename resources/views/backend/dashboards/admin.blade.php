@@ -85,8 +85,8 @@
                     </div>
                 </div>
             </div>
-            <div class="post d-flex flex-column-fluid mb-4" id="kt_post">
-                <div id="kt_content_container" class="container-xxl">
+            <div class=" mb-4" id="kt_post">
+                <div>
                     <div class="card">
                         <div class="card-header border-0 pt-6">
                             <div class="card-title">
@@ -102,13 +102,12 @@
                                         </svg>
                                     </span>
                                     <input type="text" data-kt-user-table-filter="search"
-                                        class="form-control form-control-solid w-250px ps-14" placeholder="Search user" />
+                                        class="form-control form-control-solid w-250px ps-14" placeholder="Search file" />
                                 </div>
                             </div>
                             <div class="card-toolbar">
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                    <h3 class="card-label">Latest File Uploads</h3>
-
+                                    <h3 class="card-label">Latest File Activity</h3>
                                 </div>
                                 <div class="d-flex justify-content-end align-items-center d-none"
                                     data-kt-user-table-toolbar="selected">
@@ -123,127 +122,85 @@
                             </div>
                         </div>
                         <div class="card-body py-4">
-                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_files">
                                 <thead>
                                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2"> S/N</th>
-                                        <th class="min-w-125px">First Name</th>
-                                        <th class="min-w-125px">Last Name</th>
-                                        <th class="min-w-125px">Username</th>
-                                        <th class="min-w-125px">Role</th>
-                                        <th class="min-w-125px">Joined Date</th>
-                                        <th class="text-end min-w-100px">Actions</th>
-                                        <th class="text-end min-w-100px">Permissions</th>
+                                        <th class="min-w-80px">File Name</th>
+                                        <th class="min-w-80px">Uploader</th>
+                                        <th class="min-w-80px">Upload Date</th>
+                                        <th class="min-w-80px">File Type</th>
+                                        <th class="min-w-80px">File Size</th>
+                                        <th class="min-w-80px">Views</th>
+                                        <th class="min-w-80px">Downloads</th>
+                                        <th class="min-w-80px">Visibility</th>
+                                        <th class="min-w-80px">Category</th>
+                                        <th class="min-w-80px">Subcategory</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-gray-600 fw-bold">
                                     <tr>
                                         <td> 1</td>
-                                        <td class="d-flex align-items-center">
-                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <p class="text-gray-800 mb-1">John</p>
-                                            </div>
-                                        </td>
-                                        <td class="text-gray-800">Doe</td>
-                                        <td class="text-gray-800">johndoe</td>
+                                        <td class="text-gray-800">Document1</td>
+                                        <td class="text-gray-800">John Doe</td>
+                                        <td>01 Jan 2023, 10:00 am</td>
                                         <td>
                                             <div class="badge badge-light-primary fw-bolder">
-                                                admin
+                                                fliphtml5
                                             </div>
                                         </td>
-                                        <td>01 Jan 2023, 10:00 am</td>
-                                        <td class="text-end">
-                                            <a href="#"
-                                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user_1"
-                                                title="Edit">
-                                                <i class="bi bi-pencil-fill text-primary"></i>
-                                            </a>
-                                            <a href="#"
-                                                class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal_1" title="Delete">
-                                                <i class="bi bi-trash-fill text-danger"></i>
-                                            </a>
+                                        <td class="text-gray-800">2 MB</td>
+                                        <td class="text-gray-800">150</td>
+                                        <td class="text-gray-800">30</td>
+                                        <td>
+                                            <div class="badge badge-light-success fw-bolder">
+                                                Public
+                                            </div>
                                         </td>
-                                        <td class="text-end">
-                                            <a href="#" class="text-primary text-decoration-underline">
-                                                Permissions
-                                            </a>
-                                        </td>
+                                        <td class="text-gray-800">Category1</td>
+                                        <td class="text-gray-800">Subcategory1</td>
                                     </tr>
                                     <tr>
                                         <td> 2</td>
-                                        <td class="d-flex align-items-center">
-                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <p class="text-gray-800 mb-1">Jane</p>
-                                            </div>
-                                        </td>
-                                        <td class="text-gray-800">Smith</td>
-                                        <td class="text-gray-800">janesmith</td>
+                                        <td class="text-gray-800">Presentation1</td>
+                                        <td class="text-gray-800">Jane Smith</td>
+                                        <td>15 Feb 2023, 02:30 pm</td>
                                         <td>
                                             <div class="badge badge-light-warning fw-bolder">
-                                                editor
+                                                fliphtml5
                                             </div>
                                         </td>
-                                        <td>15 Feb 2023, 02:30 pm</td>
-                                        <td class="text-end">
-                                            <a href="#"
-                                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user_2"
-                                                title="Edit">
-                                                <i class="bi bi-pencil-fill text-primary"></i>
-                                            </a>
-                                            <a href="#"
-                                                class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal_2" title="Delete">
-                                                <i class="bi bi-trash-fill text-danger"></i>
-                                            </a>
+                                        <td class="text-gray-800">5 MB</td>
+                                        <td class="text-gray-800">200</td>
+                                        <td class="text-gray-800">50</td>
+                                        <td>
+                                            <div class="badge badge-light-danger fw-bolder">
+                                                Private
+                                            </div>
                                         </td>
-                                        <td class="text-end">
-                                            <a href="#" class="text-primary text-decoration-underline">
-                                                Permissions
-                                            </a>
-                                        </td>
+                                        <td class="text-gray-800">Category2</td>
+                                        <td class="text-gray-800">Subcategory2</td>
                                     </tr>
                                     <tr>
                                         <td> 3</td>
-                                        <td class="d-flex align-items-center">
-                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <p class="text-gray-800 mb-1">Alice</p>
-                                            </div>
-                                        </td>
-                                        <td class="text-gray-800">Johnson</td>
-                                        <td class="text-gray-800">alicejohnson</td>
+                                        <td class="text-gray-800">Report1</td>
+                                        <td class="text-gray-800">Alice Johnson</td>
+                                        <td>20 Mar 2023, 11:45 am</td>
                                         <td>
                                             <div class="badge badge-light-success fw-bolder">
-                                                user
+                                                fliphtml5
                                             </div>
                                         </td>
-                                        <td>20 Mar 2023, 11:45 am</td>
-                                        <td class="text-end">
-                                            <a href="#"
-                                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#kt_modal_edit_user_3"
-                                                title="Edit">
-                                                <i class="bi bi-pencil-fill text-primary"></i>
-                                            </a>
-                                            <a href="#"
-                                                class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm me-1"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal_3" title="Delete">
-                                                <i class="bi bi-trash-fill text-danger"></i>
-                                            </a>
+                                        <td class="text-gray-800">3 MB</td>
+                                        <td class="text-gray-800">100</td>
+                                        <td class="text-gray-800">20</td>
+                                        <td>
+                                            <div class="badge badge-light-warning fw-bolder">
+                                                Restricted
+                                            </div>
                                         </td>
-                                        <td class="text-end">
-                                            <a href="#" class="text-primary text-decoration-underline">
-                                                Permissions
-                                            </a>
-                                        </td>
+                                        <td class="text-gray-800">Category3</td>
+                                        <td class="text-gray-800">Subcategory3</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -11,10 +11,7 @@ class PermissionController extends Controller
 {
     public function managePermissions($user)
     {
-        // sleep(3);
         $user = User::find($user);
-        // dd($user);
-
         if (!$user) {
             toast()->error('User not found.');
             return redirect()->back();
@@ -22,12 +19,11 @@ class PermissionController extends Controller
 
         $permissions = Permission::all();
         $userPermissions = $user->getAllPermissions();
-        // dd($userPermissions);
-
         return view('backend.user.permissions', [
             'permissions' => $permissions,
             'userPermissions' => $userPermissions,
-            'user' => $user
+            'user' => $user,
+            'title' => 'Permissions Matrix'
         ]);
     }
 

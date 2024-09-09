@@ -16,7 +16,8 @@ class CategoryController extends Controller
         $user = authenticated();
         return view('backend.category.category', [
             'categories' => $categories,
-            'user' => $user
+            'user' => $user,
+            'title' => 'Category Manager'
         ]);
     }
 

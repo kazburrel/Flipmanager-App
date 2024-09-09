@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\StoreUserUpdateRequest;
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
 
 class UserController extends Controller
 {
@@ -20,6 +19,7 @@ class UserController extends Controller
         return view('backend.user.user', [
             'users' => $users,
             'user' => $AuthUser,
+            'title' => 'User Manager'
         ]);
     }
 
@@ -91,6 +91,84 @@ class UserController extends Controller
 
         $user->delete();
         toast()->success('User deleted successfully');
+        return redirect()->back();
+    }
+
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request)
+    {
+        return view('backend.profile.edit', [
+            'title' => 'Edit Profile',
+            'user' => $request->user(),
+            'status' => session('status'),
+        ]);
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function update(Request $request)
+    {
+        $request->validate([
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'username' => [
+                'nullable',
+                'string',
+                'max:255',
+                'in:' . $request->user()->username,
+                'unique:users,username,' . $request->user()->id
+            ],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
+        ], [
+            'username.required' => 'The username field is required.',
+            'username.string' => 'The username must be a string.',
+            'username.max' => 'The username may not be greater than 255 characters.',
+            'username.in' => 'The username must match your current username.',
+            'username.unique' => 'The username has already been taken.',
+        ]);
+
+        $user = $request->user();
+        $user->fill($request->only(['fname', 'lname', 'email']));
+        $user->save();
+        toast()->success('Profile updated successfully');
+        return redirect()->back();
+    }
+
+    /**
+     * Update the user's password.
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'current_password.required' => 'The current password field is required.',
+            'current_password.string' => 'The current password must be a string.',
+            'current_password.min' => 'The current password must be at least 8 characters.',
+            'new_password.required' => 'The new password field is required.',
+            'new_password.string' => 'The new password must be a string.',
+            'new_password.min' => 'The new password must be at least 8 characters.',
+            'new_password.confirmed' => 'The new password confirmation does not match.',
+        ]);
+
+        $user = $request->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+
+        if ($request->new_password !== $request->new_password_confirmation) {
+            return back()->withErrors(['new_password' => 'The new password confirmation does not match.']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        toast()->success('Password updated successfully');
         return redirect()->back();
     }
 }
