@@ -101,8 +101,9 @@
                                                 fill="currentColor" />
                                         </svg>
                                     </span>
-                                    <input type="text" data-kt-user-table-filter="search"
-                                        class="form-control form-control-solid w-250px ps-14" placeholder="Search file" />
+                                    <input type="text" id="searchInput"
+                                        class="form-control form-control-solid w-250px ps-14" placeholder="Search file"
+                                        onkeyup="searchTable()" />
                                 </div>
                             </div>
                             <div class="card-toolbar">
@@ -138,7 +139,7 @@
                                         <th class="min-w-80px">Subcategory</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-gray-600 fw-bold">
+                                <tbody class="text-gray-600 fw-bold" id="fileTableBody">
                                     <tr>
                                         <td> 1</td>
                                         <td class="text-gray-800">Document1</td>
@@ -210,4 +211,27 @@
             </div>
         </div>
     </div>
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("kt_table_files");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 @endsection

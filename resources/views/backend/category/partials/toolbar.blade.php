@@ -1,4 +1,4 @@
-<div class="toolbar" id="kt_toolbar">
+<div class="toolbar mt-3 mt-lg-0" id="kt_toolbar">
     <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
             data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
