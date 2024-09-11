@@ -124,6 +124,26 @@
                         </a>
                     </div>
                 @endcan
+
+                @can('manage blogs')
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-2">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Blog Management</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs('admin.blogs') ? ' active' : '' }}"
+                            href="{{ route('admin.blogs') }}">
+                            <span class="menu-bullet">
+                                <span></span>
+                            </span>
+                            <span class="menu-icon fs-3">
+                                <i class="bi bi-journal-text"></i>
+                            </span>
+                            <span class="menu-title">All Blogs</span>
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
     </div>

@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('summary');
             $table->longText('content');
-            $table->string('status')->default('draft'); // draft, published, archived
+            $table->boolean('is_published')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->foreignUuid('author_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUuid('updated_by')->nullable()->constrained('users');
+            $table->string('media_id')->nullable()->constrained('media', 'collection_name')->onDelete('cascade');
             $table->timestamps();
         });
     }

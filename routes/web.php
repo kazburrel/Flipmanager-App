@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\RoleEnum;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileController;
@@ -9,11 +10,23 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('login');
-});
+    $blogs = Blog::with('media')->latest()->take(6)->get()->map(function ($blog) {
+        $blog->image = $blog->getFirstMediaUrl($blog->id);
+        return $blog;
+    });
+    return view('welcome', compact('blogs'));
+})->name('welcome');
+
+Route::get('/blog/{slug}', function ($slug) {
+    $blog = Blog::where('slug', $slug)->with('media')->firstOrFail();
+    $blog->image = $blog->getFirstMediaUrl($blog->id);
+    // dd($blog->image);
+    return view('blog-show', compact('blog'));
+})->name('blog.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile', [UserController::class, 'edit'])->name('view.user.profile.edit');
@@ -63,6 +76,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/upload', [FileController::class, 'uploadFiles'])->name('admin.files.upload');
         Route::get('/{folder}', [FileController::class, 'viewFolderFile'])->name('admin.viewFolder.file');
         Route::delete('/{file}', [FileController::class, 'destroyFile'])->name('admin.files.destroy');
+    });
+
+    Route::prefix('admin/blogs')->middleware('permission:manage blogs')->group(function () {
+        Route::get('/', [BlogController::class, 'listBlogs'])->name('admin.blogs');
+        Route::get('/{blog}', [BlogController::class, 'showBlog'])->name('admin.blogs.show');
+
+        Route::post('/', [BlogController::class, 'storeBlog'])->name('admin.blogs.store');
+        Route::get('/{blog}/edit', [BlogController::class, 'editBlog'])->name('admin.blogs.edit');
+        Route::put('/{blog}', [BlogController::class, 'updateBlog'])->name('admin.blogs.update');
+        Route::delete('/{blog}', [BlogController::class, 'destroyBlog'])->name('admin.blogs.destroy');
     });
 
     Route::middleware(['role:' . RoleEnum::Editor->value])->group(function () {

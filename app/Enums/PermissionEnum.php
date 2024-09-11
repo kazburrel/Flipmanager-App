@@ -14,6 +14,8 @@ enum PermissionEnum: string
     case UploadFiles = 'upload files';
     case EditFiles = 'edit files';
     case DeleteFiles = 'delete files';
+    case ManageBlogs = 'manage blogs';
+    case CanPublishBlogs = 'publish blogs';
 
     // extra helper to allow for greater customization of displayed values, without disclosing the name/value data directly
     public function label(): string
@@ -27,6 +29,8 @@ enum PermissionEnum: string
             static::UploadFiles => 'Upload Files',
             static::EditFiles => 'Edit Files',
             static::DeleteFiles => 'Delete Files',
+            static::ManageBlogs => 'Manage Blogs',
+            static::CanPublishBlogs => 'Publish Blogs',
         };
     }
 }

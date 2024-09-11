@@ -20,8 +20,8 @@
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
             <a href="/">
-                <img src="https://dummyimage.com/200x200/000/fff&text=Logo" alt="Dummy Logo"
-                    class="w-20 h-20 fill-current text-gray-500" />
+                <img src="https://fliphtml5.gogo2hk.com//storage/settings/August2024/vBfbaySsFZXKC8Sd17yX.png"
+                    alt="VTC Logo" class="w-40 h-40 fill-current text-gray-500" />
             </a>
         </div>
 

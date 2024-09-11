@@ -5,58 +5,72 @@
     <base href="">
     <title>{{ $title ?? 'Default Title' }}</title>
     <meta charset="utf-8" />
-    <meta name="description"
-        content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
-    <meta name="keywords"
-        content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="description" content="{{ $blog->summary }}" />
+    <meta name="keywords" content="Blog, Laravel, Article" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title"
-        content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <meta property="og:title" content="{{ $blog->title }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:site_name" content="Your Blog Site" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="shortcut icon" href="{{ asset('images/Favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    <link href="{{ asset('admin_assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('admin_assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
     <link href="{{ asset('admin_assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/pre.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin_assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    {{-- @livewireStyles --}}
 </head>
 
 <body id="kt_body"
-    class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed"
+    class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed d-flex flex-column min-vh-100"
     style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
-    <div class="d-flex flex-column flex-root">
-        <div class="page d-flex flex-row flex-column-fluid">
-            @include('backend.layouts.aside')
-            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-                @include('backend.layouts.header')
-                <div class="container">
-                    @yield('content')
-                    @yield('scripts')
+    <div class="d-flex flex-column flex-root flex-grow-1">
+        <div class="page d-flex flex-row flex-column-fluid flex-grow-1">
+            <div class="container-fluid p-0 flex-grow-1 d-flex flex-column">
+                <header class="d-flex justify-content-between align-items-center p-5 text-white fixed-top shadow"
+                    style="background-color:#d6e542;">
+                    <div class="logo">
+                        <a href="{{ route('welcome') }}">
+                            <img src="https://fliphtml5.gogo2hk.com//storage/settings/August2024/vBfbaySsFZXKC8Sd17yX.png"
+                                alt="Logo" height="50" width="100">
+                        </a>
+                    </div>
+                    <div class="login">
+                        <a href="{{ route('login') }}" class="btn btn-dark" style="background-color: #1fa6dd">Login</a>
+                    </div>
+                </header>
 
-                </div>
-                @include('backend.layouts.footer')
+                <section class="blog-content pt-5 shadow-sm flex-grow-1"
+                    style="padding-top: 5rem; margin-top: 5.2rem; margin-bottom: 2rem;">
+                    <div class="container">
+                        <h1 class="mb-5 mt-5 text-center display-6"
+                            style="color:#d6e542; font-family: 'Cursive', sans-serif;">{{ $blog->title }}</h1>
+                        <div class="text-center mb-4">
+                            <img src="{{ $blog->image }}" alt="{{ $blog->title }}" class="img-fluid rounded"
+                                style="max-width: 50%;">
+                        </div>
+                        <div class="blog-body" style="font-size: 1.2em;">
+                            {!! $blog->content !!}
+                        </div>
+                        <div class="text-muted m-5">
+                            <small>Published on {{ $blog->created_at->format('M d, Y') }}</small>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="mt-5 text-white p-5 text-center shadow" style="background-color:#d6e542;">
+                    <p>&copy; 2023 Your Company. All rights reserved.</p>
+                </footer>
             </div>
         </div>
     </div>
+
     <script>
         var hostUrl = "assets/";
     </script>
     <script src="{{ asset('js/pre.js') }}"></script>
     <script src="{{ asset('admin_assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('admin_assets/js/scripts.bundle.js') }}"></script>
-    <script src="{{ asset('admin_assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    <script src="{{ asset('admin_assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('admin_assets/plugins/custom/vis-timeline/vis-timeline.bundle.js') }}"></script>
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
