@@ -17,7 +17,10 @@
         </div>
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             @php
-                $hour = date('H');
+                use Carbon\Carbon;
+
+                $hour = Carbon::now()->format('H');
+                $minute = Carbon::now()->format('i');
                 if ($hour < 12) {
                     $greeting = 'Good Morning 🌅';
                     $subMessage = 'How was your night?';
@@ -29,6 +32,7 @@
                     $subMessage = 'How was your day?';
                 }
             @endphp
+
             <div class="m-0">
                 <span class="d-lg fw-bolder text-hover-primary fs-3">
                     {{ $greeting }}, {{ $user->fname }} {{ $user->lname }}

@@ -54,7 +54,7 @@
                 @can('manage categories')
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-2">
-                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Category</span>
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Course</span>
                         </div>
                     </div>
 
@@ -65,9 +65,9 @@
                                 <span></span>
                             </span>
                             <span class="menu-icon">
-                                <i class="bi bi-folder"></i>
+                                <i class="bi bi-tags"></i>
                             </span>
-                            <span class="menu-title">Category Management</span>
+                            <span class="menu-title">Course Management</span>
                         </a>
                     </div>
                 @endcan
@@ -80,19 +80,25 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link{{ request()->routeIs('job.vacancy') || request()->routeIs('get.job.application.uuid') ? ' active' : '' }}"
-                            href="#">
+                        <a class="menu-link{{ request()->routeIs('admin.folders') || request()->routeIs('admin.viewFolder.file') ? ' active' : '' }}"
+                            href="{{ route('admin.folders') }}">
                             <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
+                                <span></span>
                             </span>
-                            <span class="menu-title">File Uploads</span>
+                            <span class="menu-icon">
+                                <i class="bi bi-folder2-open"></i>
+                            </span>
+                            <span class="menu-title">All Folders</span>
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link{{ request()->routeIs('get.advertise.job.vacancy') ? ' active' : '' }}"
-                            href="#">
+                        <a class="menu-link{{ request()->routeIs('admin.files') ? ' active' : '' }}"
+                            href="{{ route('admin.files') }}">
                             <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
+                                <span></span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="bi bi-file-earmark"></i>
                             </span>
                             <span class="menu-title">All Files</span>
                         </a>

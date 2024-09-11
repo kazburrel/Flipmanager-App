@@ -29,7 +29,7 @@
                         ])
                     @empty
                         <tr>
-                            <td colspan="5">No categories found</td>
+                            <td colspan="5">No courses found</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -2,11 +2,11 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div style="position:relative;padding-top:max(60%,324px);width:100%;height:0;">
+    {{-- <div style="position:relative;padding-top:max(60%,324px);width:100%;height:0;">
         <iframe style="position:absolute;border:none;width:100%;height:100%;left:0;top:0;"
             src="https://fliphtml5.com/bookcase/tcxou/" seamless="seamless" scrolling="no" frameborder="0"
             allowtransparency="true" allowfullscreen="true"></iframe>
-    </div>
+    </div> --}}
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -14,8 +14,8 @@
         <!-- Username -->
         <div>
             <x-input-label for="username" :value="__('Username')" />
-            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')"
-                required autofocus autocomplete="username" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required
+                autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 

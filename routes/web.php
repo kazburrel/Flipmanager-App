@@ -3,6 +3,8 @@
 use App\Enums\RoleEnum;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FolderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
@@ -48,6 +50,19 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{user}', [PermissionController::class, 'managePermissions'])->name('admin.users.permissions');
             Route::put('/{user}', [PermissionController::class, 'updatePermission'])->name('admin.users.updatePermission');
         });
+    });
+    Route::prefix('admin/folders')->middleware('permission:manage files')->group(function () {
+        Route::get('/', [FolderController::class, 'listFolders'])->name('admin.folders');
+        Route::post('/', [FolderController::class, 'storeFolder'])->name('admin.folder.store');
+        Route::put('/{folder}/edit', [FolderController::class, 'updateFolder'])->name('admin.folder.update');
+        Route::delete('/{folder}', [FolderController::class, 'destroyFolder'])->name('admin.folder.destroy');
+    });
+
+    Route::prefix('admin/files')->middleware('permission:manage files')->group(function () {
+        Route::get('/', [FileController::class, 'listFiles'])->name('admin.files');
+        Route::post('/upload', [FileController::class, 'uploadFiles'])->name('admin.files.upload');
+        Route::get('/{folder}', [FileController::class, 'viewFolderFile'])->name('admin.viewFolder.file');
+        Route::delete('/{file}', [FileController::class, 'destroyFile'])->name('admin.files.destroy');
     });
 
     Route::middleware(['role:' . RoleEnum::Editor->value])->group(function () {

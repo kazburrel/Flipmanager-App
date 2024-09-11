@@ -1,9 +1,10 @@
 <?php
 
-use App\Models\Folder;
+namespace App\Models;
+
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseMedia;
 
-class File extends BaseMedia
+class Media extends BaseMedia
 {
     // Define inverse relationship: A media item belongs to a folder
     public function folder()

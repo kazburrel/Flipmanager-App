@@ -3,11 +3,11 @@
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
             data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
             class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Categories and Subcategories </h1>
+            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Courses and Subcourses </h1>
         </div>
         <div class="d-flex align-items-center gap-2 gap-lg-3">
             <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                data-bs-target="#kt_modal_add_category">Add Category</a>
+                data-bs-target="#kt_modal_add_category">Add Course</a>
         </div>
     </div>
 </div>
@@ -25,11 +25,11 @@
                     <form action="{{ route('admin.categories.store') }}" method="POST">
                         @csrf
                         <div class="mb-13 text-center">
-                            <h1 class="mb-3">Add Category</h1>
+                            <h1 class="mb-3">Add Course</h1>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Category Name</span>
+                                <span class="required">Course Name</span>
                             </label>
                             <input type="text" class="form-control form-control-solid"
                                 placeholder="Enter Category Name" name="name" value="{{ old('name') }}" />

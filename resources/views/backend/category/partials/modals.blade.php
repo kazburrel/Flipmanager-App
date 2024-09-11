@@ -13,14 +13,14 @@
                         @csrf
                         <input type="hidden" name="category_id" value="{{ $category->id }}">
                         <div class="mb-13 text-center">
-                            <h1 class="mb-3">Add Subcategory</h1>
+                            <h1 class="mb-3">Add Subcourse</h1>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Subcategory Name</span>
+                                <span class="required">Subcourse Name</span>
                             </label>
                             <input type="text" class="form-control form-control-solid"
-                                placeholder="Enter Subcategory Name" name="name" value="{{ old('name') }}" />
+                                placeholder="Enter Subcourse Name" name="name" value="{{ old('name') }}" />
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -30,14 +30,14 @@
                                 <span>Description</span>
                             </label>
                             <textarea class="form-control form-control-solid" rows="3" name="description"
-                                placeholder="Enter Subcategory Description">{{ old('description') }}</textarea>
+                                placeholder="Enter Subcourse Description">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span>Category</span>
+                                <span>Course</span>
                             </label>
                             <input type="text" class="form-control form-control-solid" value="{{ $category->name }}"
                                 readonly />
@@ -76,10 +76,10 @@
                             </div>
                             <div class="d-flex flex-column mb-8 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Subcategory Name</span>
+                                    <span class="required">Subcourse Name</span>
                                 </label>
                                 <input type="text" class="form-control form-control-solid"
-                                    placeholder="Enter Subcategory Name" name="name"
+                                    placeholder="Enter Subcourse Name" name="name"
                                     value="{{ old('name', $subcategory->name) }}" />
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -90,14 +90,14 @@
                                     <span>Description</span>
                                 </label>
                                 <textarea class="form-control form-control-solid" rows="3" name="description"
-                                    placeholder="Enter Subcategory Description">{{ old('description', $subcategory->description) }}</textarea>
+                                    placeholder="Enter Subcourse Description">{{ old('description', $subcategory->description) }}</textarea>
                                 @error('description')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="d-flex flex-column mb-8 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span>Category</span>
+                                    <span>Course</span>
                                 </label>
                                 <input type="text" class="form-control form-control-solid"
                                     value="{{ $category->name }}" readonly />
@@ -132,14 +132,14 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-13 text-center">
-                            <h1 class="mb-3">Edit Category</h1>
+                            <h1 class="mb-3">Edit Course</h1>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Category Name</span>
+                                <span class="required">Course Name</span>
                             </label>
                             <input type="text" class="form-control form-control-solid"
-                                placeholder="Enter Category Name" name="name"
+                                placeholder="Enter Course Name" name="name"
                                 value="{{ old('name', $category->name) }}" />
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -150,7 +150,7 @@
                                 <span>Description</span>
                             </label>
                             <textarea class="form-control form-control-solid" rows="3" name="description"
-                                placeholder="Enter Category Description">{{ old('description', $category->description) }}</textarea>
+                                placeholder="Enter Course Description">{{ old('description', $category->description) }}</textarea>
                             @error('description')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
