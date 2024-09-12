@@ -154,6 +154,20 @@
                         </a>
                     </div>
                 @endcan
+                @can('manage events')
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs('admin.events') ? ' active' : '' }}"
+                            href="{{ route('admin.events') }}">
+                            <span class="menu-bullet">
+                                <span></span>
+                            </span>
+                            <span class="menu-icon fs-3">
+                                <i class="bi bi-calendar-event"></i>
+                            </span>
+                            <span class="menu-title">All Events</span>
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
     </div>

@@ -123,6 +123,37 @@
                             src="https://fliphtml5.com/bookcase/edihj/" seamless="seamless" scrolling="no"
                             frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe></div>
                 </section>
+                <section class="events mt-5 p-4 shadow-sm" style="background-color: #f8f9fa;">
+                    <div class="container">
+                        <h2 class="mb-4 text-center display-6"
+                            style="color:#d6e542; font-family: 'Cursive', sans-serif;">
+                            UPCOMING <span class="text-dark" style="font-family: 'Cursive', sans-serif;">EVENTS</span>
+                        </h2>
+                        <div class="row">
+                            @forelse($events as $event)
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100 shadow">
+                                        <img src="{{ $event->image }}" class="card-img-top"
+                                            alt="{{ $event->title }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="color:#d6e542;">{{ $event->title }}</h5>
+                                            <p class="card-text text-dark">{{ Str::limit($event->summary, 100) }}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="card-text text-muted mt-2 mb-0"><small>Event Date:
+                                                        {{ $event->date->format('M d, Y') }}</small></p>
+                                                <a href="{{ route('event.show', $event->id) }}"
+                                                    style="color:#d6e542; text-decoration: underline;">Read More>>></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-center">No Events available.</p>
+                            @endforelse
+                        </div>
+                    </div>
+                </section>
+
 
                 <section class="news mt-5 p-4 shadow-sm" style="background-color: #f8f9fa;">
                     <div class="container">

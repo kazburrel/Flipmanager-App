@@ -16,6 +16,7 @@ enum PermissionEnum: string
     case DeleteFiles = 'delete files';
     case ManageBlogs = 'manage blogs';
     case CanPublishBlogs = 'publish blogs';
+    case ManageEvents = 'manage events';
 
     // extra helper to allow for greater customization of displayed values, without disclosing the name/value data directly
     public function label(): string
@@ -31,6 +32,7 @@ enum PermissionEnum: string
             static::DeleteFiles => 'Delete Files',
             static::ManageBlogs => 'Manage Blogs',
             static::CanPublishBlogs => 'Publish Blogs',
+            static::ManageEvents => 'Manage Events',
         };
     }
 }

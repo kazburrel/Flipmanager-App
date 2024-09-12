@@ -5,14 +5,14 @@
     <base href="">
     <title>{{ $title ?? 'Default Title' }}</title>
     <meta charset="utf-8" />
-    <meta name="description" content="{{ $blog->summary }}" />
-    <meta name="keywords" content="Blog, Laravel, Article" />
+    <meta name="description" content="{{ $event->summary }}" />
+    <meta name="keywords" content="Event, Laravel, Details" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="{{ $blog->title }}" />
+    <meta property="og:type" content="event" />
+    <meta property="og:title" content="{{ $event->title }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:site_name" content="Your Blog Site" />
+    <meta property="og:site_name" content="Your Event Site" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/Favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -63,20 +63,20 @@
                     @endif
                 </header>
 
-                <section class="blog-content pt-5 shadow-sm flex-grow-1"
+                <section class="event-content pt-5 shadow-sm flex-grow-1"
                     style="padding-top: 5rem; margin-top: 6.2rem; margin-bottom: 2rem;">
                     <div class="container">
                         <h1 class="mb-5 mt-5 text-center display-6"
-                            style="color:#d6e542; font-family: 'Cursive', sans-serif;">{{ $blog->title }}</h1>
+                            style="color:#d6e542; font-family: 'Cursive', sans-serif;">{{ $event->title }}</h1>
                         <div class="text-center mb-4">
-                            <img src="{{ $blog->image }}" alt="{{ $blog->title }}" class="img-fluid rounded"
+                            <img src="{{ $event->image }}" alt="{{ $event->title }}" class="img-fluid rounded"
                                 style="max-width: 50%;">
                         </div>
-                        <div class="blog-body text-center" style="font-size: 1.2em;">
-                            {!! $blog->content !!}
+                        <div class="event-body text-center" style="font-size: 1.2em;">
+                            {!! $event->description !!}
                         </div>
                         <div class="text-muted m-5">
-                            <small>Published on {{ $blog->created_at->format('M d, Y') }}</small>
+                            <small>Published on {{ $event->created_at->format('M d, Y') }}</small>
                         </div>
                     </div>
                 </section>

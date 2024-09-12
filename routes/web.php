@@ -4,6 +4,7 @@ use App\Enums\RoleEnum;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FolderController;
 use App\Http\Controllers\PermissionController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
 use App\Models\Blog;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,16 +20,25 @@ Route::get('/', function () {
         $blog->image = $blog->getFirstMediaUrl($blog->id);
         return $blog;
     });
+    $events = Event::with('media')->latest()->take(6)->get()->map(function ($event) {
+        $event->image = $event->getFirstMediaUrl($event->id);
+        return $event;
+    });
     $title = 'Welcome Page';
-    return view('welcome', compact('blogs', 'title'));
+    return view('welcome', compact('blogs', 'events', 'title'));
 })->name('welcome');
 
 Route::get('/blog/{slug}', function ($slug) {
     $blog = Blog::where('slug', $slug)->with('media')->firstOrFail();
     $blog->image = $blog->getFirstMediaUrl($blog->id);
-    // dd($blog->image);
     return view('blog-show', compact('blog'));
 })->name('blog.show');
+
+Route::get('/event/{id}', function ($id) {
+    $event = Event::where('id', $id)->with('media')->firstOrFail();
+    $event->image = $event->getFirstMediaUrl($event->id);
+    return view('event-show', compact('event'));
+})->name('event.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile', [UserController::class, 'edit'])->name('view.user.profile.edit');
@@ -83,6 +94,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{blog}/edit', [BlogController::class, 'editBlog'])->name('admin.blogs.edit');
         Route::put('/{blog}', [BlogController::class, 'updateBlog'])->name('admin.blogs.update');
         Route::delete('/{blog}', [BlogController::class, 'destroyBlog'])->name('admin.blogs.destroy');
+    });
+
+    Route::prefix('admin/events')->middleware('permission:manage events')->group(function () {
+        Route::get('/', [EventController::class, 'listEvents'])->name('admin.events');
+        Route::post('/', [EventController::class, 'storeEvent'])->name('admin.events.store');
+        Route::get('/{event}', [EventController::class, 'showEvent'])->name('admin.events.show');
+        Route::put('/{event}', [EventController::class, 'updateEvent'])->name('admin.events.update');
+        Route::delete('/{event}', [EventController::class, 'destroyEvent'])->name('admin.events.destroy');
     });
 
     Route::middleware(['role:' . RoleEnum::Editor->value])->group(function () {
