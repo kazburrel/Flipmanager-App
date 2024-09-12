@@ -69,7 +69,7 @@
                         style="background-color: #f8f9fa;">
                         <div class="card-header pt-5">
                             <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-primary me-2 lh-1 ls-n2">5</span>
+                                <span class="fs-2hx fw-bolder text-primary me-2 lh-1 ls-n2">{{ $totalMedia }}</span>
                                 <span class="text-gray-600 pt-1 fw-bold fs-6">Total Files</span>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                         style="background-color: #f8f9fa;">
                         <div class="card-header pt-5">
                             <div class="card-title d-flex flex-column">
-                                <span class="fs-2hx fw-bolder text-success me-2 lh-1 ls-n2">3</span>
+                                <span class="fs-2hx fw-bolder text-success me-2 lh-1 ls-n2">{{ $totalFolders }}</span>
                                 <span class="text-gray-600 pt-1 fw-bold fs-6">Total Folders</span>
                             </div>
                         </div>

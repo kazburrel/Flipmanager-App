@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Folder;
+use App\Models\Media;
 use App\Models\Subcategory;
 use App\Models\User;
 
@@ -18,6 +21,9 @@ class DashboardController extends Controller
         $adminCount = User::role('admin')->count();
         $editorCount = User::role('editor')->count();
         $userCount = User::role('user')->count();
+        $totalMedia = Media::count();
+        $totalFolders = Folder::count();
+        $totalBlogs = Blog::count();
 
         return view('backend.dashboards.admin', [
             'title' => 'Admin Dashboard',
@@ -28,6 +34,9 @@ class DashboardController extends Controller
             'adminCount' => $adminCount,
             'editorCount' => $editorCount,
             'userCount' => $userCount,
+            'totalMedia' => $totalMedia,
+            'totalFolders' => $totalFolders,
+            'totalBlogs' => $totalBlogs,
         ]);
     }
 

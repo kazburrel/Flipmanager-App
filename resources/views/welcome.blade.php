@@ -18,7 +18,7 @@
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{ asset('images/Favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/vtc-logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <link href="{{ asset('admin_assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
         type="text/css" />
@@ -40,13 +40,36 @@
                     style="background-color:#d6e542;">
                     <div class="logo">
                         <a href="{{ route('welcome') }}">
-                            <img src="https://fliphtml5.gogo2hk.com//storage/settings/August2024/vBfbaySsFZXKC8Sd17yX.png"
-                                alt="Logo" height="50" width="100">
+                            <img src="{{ asset('images/vtc-logo.png') }}" alt="Logo"
+                                style="height: auto; width: 75px;">
                         </a>
                     </div>
-                    <div class="login">
-                        <a href="{{ route('login') }}" class="btn btn-dark" style="background-color: #1fa6dd">Login</a>
-                    </div>
+                    @if (Auth::check())
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                        @if ($user->hasRole('admin'))
+                            <div class="dashboard">
+                                <a href="{{ route('admin.dashboard') }}" class="btn btn-dark"
+                                    style="background-color: #1fa6dd">Go to Dashboard</a>
+                            </div>
+                        @elseif ($user->hasRole('editor'))
+                            <div class="dashboard">
+                                <a href="{{ route('editor.dashboard') }}" class="btn btn-dark"
+                                    style="background-color: #1fa6dd">Go to Dashboard</a>
+                            </div>
+                        @else
+                            <div class="dashboard">
+                                <a href="{{ route('user.dashboard') }}" class="btn btn-dark"
+                                    style="background-color: #1fa6dd">Go to Dashboard</a>
+                            </div>
+                        @endif
+                    @else
+                        <div class="login">
+                            <a href="{{ route('login') }}" class="btn btn-dark"
+                                style="background-color: #1fa6dd">Login</a>
+                        </div>
+                    @endif
                 </header>
 
                 <section class="hero pt-5 shadow-sm" style="padding-top: 5rem; margin-top: 5.2rem;">
@@ -63,20 +86,16 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="https://hospitality.vtc.edu.hk/uploads/banner01.png" class="d-block w-100"
-                                    alt="Slide 1">
+                                <img src="{{ asset('images/banner01.png') }}" class="d-block w-100" alt="Slide 1">
                             </div>
                             <div class="carousel-item">
-                                <img src="https://hospitality.vtc.edu.hk/uploads/banner02.png" class="d-block w-100"
-                                    alt="Slide 2">
+                                <img src="{{ asset('images/banner02.png') }}" class="d-block w-100" alt="Slide 2">
                             </div>
                             <div class="carousel-item">
-                                <img src="https://hospitality.vtc.edu.hk/uploads/banner03.png" class="d-block w-100"
-                                    alt="Slide 3">
+                                <img src="{{ asset('images/banner03.png') }}" class="d-block w-100" alt="Slide 3">
                             </div>
                             <div class="carousel-item">
-                                <img src="https://hospitality.vtc.edu.hk/uploads/banner04.png" class="d-block w-100"
-                                    alt="Slide 4">
+                                <img src="{{ asset('images/banner04.png') }}" class="d-block w-100" alt="Slide 4">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button"
@@ -99,16 +118,10 @@
                 </style>
 
                 <section class="bookshelf mt-5 p-4 shadow-sm">
-                    <div class="container">
-                        <h1 class="mb-4 text-center display-6"
-                            style="color:#d6e542; font-family: 'Cursive', sans-serif;">BOOK<span class="text-dark"
-                                style="font-family: 'Cursive', sans-serif;">SHELF</span></h1>
-                        <div style="position:relative;padding-top:max(60%,324px);width:100%;height:0;">
-                            <iframe style="position:absolute;border:none;width:100%;height:100%;left:0;top:0;"
-                                src="https://fliphtml5.com/bookcase/tcxou/" seamless="seamless" scrolling="no"
-                                frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
-                        </div>
-                    </div>
+                    <div style="position:relative;padding-top:max(60%,324px);width:100%;height:0;"><iframe
+                            style="position:absolute;border:none;width:100%;height:100%;left:0;top:0;"
+                            src="https://fliphtml5.com/bookcase/edihj/" seamless="seamless" scrolling="no"
+                            frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe></div>
                 </section>
 
                 <section class="news mt-5 p-4 shadow-sm" style="background-color: #f8f9fa;">
@@ -143,7 +156,7 @@
                 </section>
 
                 <footer class="mt-5 text-white p-5 text-center shadow" style="background-color:#d6e542;">
-                    <p>&copy; 2023 Your Company. All rights reserved.</p>
+                    <p>&copy; {{ date('Y') }} Vocational Training Council. All rights reserved.</p>
                 </footer>
             </div>
 
@@ -184,7 +197,6 @@
     <script src="{{ asset('admin_assets/js/custom/account/settings/signin-methods.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/apps/user-management/users/list/table.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/apps/file-manager/list.js') }}"></script>
-
     @include('sweetalert::alert')
 </body>
 

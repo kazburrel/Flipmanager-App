@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
         } elseif ($user->hasRole(RoleEnum::Editor->value)) {
             return redirect()->intended(route('editor.dashboard'));
         } else {
-            return redirect()->intended(route('user.dashboard'));
+            return redirect()->intended(route('admin.files'));
         }
     }
 

@@ -14,11 +14,12 @@ use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $blogs = Blog::with('media')->latest()->take(6)->get()->map(function ($blog) {
+    $blogs = Blog::with('media')->where('is_published', true)->latest()->take(6)->get()->map(function ($blog) {
         $blog->image = $blog->getFirstMediaUrl($blog->id);
         return $blog;
     });
-    return view('welcome', compact('blogs'));
+    $title = 'Welcome Page';
+    return view('welcome', compact('blogs', 'title'));
 })->name('welcome');
 
 Route::get('/blog/{slug}', function ($slug) {
@@ -65,16 +66,12 @@ Route::middleware(['auth'])->group(function () {
         });
     });
     Route::prefix('admin/folders')->middleware('permission:manage files')->group(function () {
-        Route::get('/', [FolderController::class, 'listFolders'])->name('admin.folders');
-        Route::post('/', [FolderController::class, 'storeFolder'])->name('admin.folder.store');
         Route::put('/{folder}/edit', [FolderController::class, 'updateFolder'])->name('admin.folder.update');
         Route::delete('/{folder}', [FolderController::class, 'destroyFolder'])->name('admin.folder.destroy');
     });
 
     Route::prefix('admin/files')->middleware('permission:manage files')->group(function () {
-        Route::get('/', [FileController::class, 'listFiles'])->name('admin.files');
         Route::post('/upload', [FileController::class, 'uploadFiles'])->name('admin.files.upload');
-        Route::get('/{folder}', [FileController::class, 'viewFolderFile'])->name('admin.viewFolder.file');
         Route::delete('/{file}', [FileController::class, 'destroyFile'])->name('admin.files.destroy');
     });
 
@@ -94,6 +91,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['role:' . RoleEnum::User->value])->group(function () {
         Route::get('/user/dashboard', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
+    });
+    Route::middleware('permission:view files')->group(function () {
+        Route::get('/files', [FileController::class, 'listFiles'])->name('admin.files');
+        Route::get('/files/{folder}', [FileController::class, 'viewFolderFile'])->name('admin.viewFolder.file');
+        Route::get('/folders', [FolderController::class, 'listFolders'])->name('admin.folders');
+        Route::post('/folders', [FolderController::class, 'storeFolder'])->name('admin.folder.store');
     });
 });
 

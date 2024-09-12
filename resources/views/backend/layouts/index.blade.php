@@ -18,7 +18,7 @@
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{ asset('images/Favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/vtc-logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <link href="{{ asset('admin_assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
         type="text/css" />

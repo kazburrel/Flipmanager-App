@@ -3,7 +3,7 @@
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <div id="kt_content_container" class="container-xxl">
-            <div class="post d-flex flex-column-fluid mb-4" id="kt_post">
+            {{-- <div class="post d-flex flex-column-fluid mb-4" id="kt_post">
                 <div id="kt_content_container" class="container-xxl">
                     <div class="card">
                         <div class="card-header border-0 pt-6">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

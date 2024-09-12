@@ -47,9 +47,13 @@ class FolderController extends Controller
 
     public function destroyFolder(Folder $folder)
     {
+        // Get all media files associated with the folder and delete them
+        $folder->getMedia()->each->delete();
+
+        // Delete the folder
         $folder->delete();
 
-        toast()->success('Folder deleted successfully.');
+        toast()->success('Folder and its files deleted successfully.');
         return redirect()->back();
     }
 }

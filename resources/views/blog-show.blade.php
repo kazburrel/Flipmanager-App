@@ -31,17 +31,40 @@
                     style="background-color:#d6e542;">
                     <div class="logo">
                         <a href="{{ route('welcome') }}">
-                            <img src="https://fliphtml5.gogo2hk.com//storage/settings/August2024/vBfbaySsFZXKC8Sd17yX.png"
-                                alt="Logo" height="50" width="100">
+                            <img src="{{ asset('images/vtc-logo.png') }}" alt="Logo"
+                                style="height: auto; width: 75px;">
                         </a>
                     </div>
-                    <div class="login">
-                        <a href="{{ route('login') }}" class="btn btn-dark" style="background-color: #1fa6dd">Login</a>
-                    </div>
+                    @if (Auth::check())
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                        @if ($user->hasRole('admin'))
+                            <div class="dashboard">
+                                <a href="{{ route('admin.dashboard') }}" class="btn btn-dark"
+                                    style="background-color: #1fa6dd">Go to Dashboard</a>
+                            </div>
+                        @elseif ($user->hasRole('editor'))
+                            <div class="dashboard">
+                                <a href="{{ route('editor.dashboard') }}" class="btn btn-dark"
+                                    style="background-color: #1fa6dd">Go to Dashboard</a>
+                            </div>
+                        @else
+                            <div class="dashboard">
+                                <a href="{{ route('user.dashboard') }}" class="btn btn-dark"
+                                    style="background-color: #1fa6dd">Go to Dashboard</a>
+                            </div>
+                        @endif
+                    @else
+                        <div class="login">
+                            <a href="{{ route('login') }}" class="btn btn-dark"
+                                style="background-color: #1fa6dd">Login</a>
+                        </div>
+                    @endif
                 </header>
 
                 <section class="blog-content pt-5 shadow-sm flex-grow-1"
-                    style="padding-top: 5rem; margin-top: 5.2rem; margin-bottom: 2rem;">
+                    style="padding-top: 5rem; margin-top: 6.2rem; margin-bottom: 2rem;">
                     <div class="container">
                         <h1 class="mb-5 mt-5 text-center display-6"
                             style="color:#d6e542; font-family: 'Cursive', sans-serif;">{{ $blog->title }}</h1>

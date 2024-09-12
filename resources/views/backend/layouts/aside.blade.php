@@ -38,18 +38,28 @@
             data-kt-scroll-offset="0">
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
                 id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                <div class="menu-item">
-                    <a class="menu-link{{ request()->routeIs('admin.dashboard') || request()->routeIs('editor.dashboard') || request()->routeIs('user.dashboard') ? ' active' : '' }}"
-                        href="{{ route('admin.dashboard') }}">
-                        <span class="menu-bullet">
-                            <span></span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="bi bi-speedometer2"></i>
-                        </span>
-                        <span class="menu-title">Dashboard</span>
-                    </a>
-                </div>
+                @php
+                    $role = $user->getRoleNames()->first();
+                    $dashboardRoute = match ($role) {
+                        'admin' => 'admin.dashboard',
+                        'editor' => 'editor.dashboard',
+                        default => 'admin.dashboard',
+                    };
+                @endphp
+                @if ($role !== 'user')
+                    <div class="menu-item">
+                        <a class="menu-link{{ request()->routeIs($dashboardRoute) ? ' active' : '' }}"
+                            href="{{ route($dashboardRoute) }}">
+                            <span class="menu-bullet">
+                                <span></span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="bi bi-speedometer2"></i>
+                            </span>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </div>
+                @endif
 
                 @can('manage categories')
                     <div class="menu-item">
@@ -72,7 +82,7 @@
                     </div>
                 @endcan
 
-                @can('manage files')
+                @can('view files')
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-2">
                             <span class="menu-section text-muted text-uppercase fs-8 ls-1">File System</span>
@@ -128,7 +138,7 @@
                 @can('manage blogs')
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-2">
-                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Blog Management</span>
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">News and Events</span>
                         </div>
                     </div>
                     <div class="menu-item">
@@ -140,7 +150,7 @@
                             <span class="menu-icon fs-3">
                                 <i class="bi bi-journal-text"></i>
                             </span>
-                            <span class="menu-title">All Blogs</span>
+                            <span class="menu-title">All News</span>
                         </a>
                     </div>
                 @endcan

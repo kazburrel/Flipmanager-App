@@ -99,7 +99,7 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('backend.profile.edit', [
+        return view('backend.profile_management.edit', [
             'title' => 'Edit Profile',
             'user' => $request->user(),
             'status' => session('status'),

@@ -48,7 +48,7 @@ class FileController extends Controller
         $request->validate([
             'folder_id' => 'required|exists:folders,id',
             'file' => 'required|array',
-            'file.*' => 'file|max:1024', // 1MB Max per file
+            'file.*' => 'file|max:1024',
         ]);
 
         $folder = Folder::findOrFail($request->folder_id);
